@@ -1,0 +1,29 @@
+<ul class="list-group" *ngIf="modelsList">
+    <li
+      (click)="onModelClick(null)"
+      class="list-group-item"
+      [ngClass]="{ active: selectedModelId === null }"
+      [ariaCurrent]="selectedModelId === null"
+    >
+      All
+    </li>
+    <li
+      *ngFor="let model of modelsList.items"
+      (click)="onModelClick(model.id)"
+      class="list-group-item"
+      [ngClass]="{ active: selectedModelId === model.id }"
+      [ariaCurrent]="selectedModelId === null"
+    >
+      {{ model.name }}
+    </li>
+  </ul>
+  <!-- Lazy loading -->
+  <button
+    *ngIf="modelsList"
+    (click)="onViewMoreButtonClicked()"
+    class="btn border-0"
+    [ngClass]="{ disabled: !modelsList.hasNextPage }"
+    [disabled]="!modelsList.hasNextPage"
+  >
+    View more
+  </button>
